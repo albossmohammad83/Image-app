@@ -1,13 +1,14 @@
 <header>
     <h1>Login</h1>
 </header>
-<form>
+<form id="form" class="form" method="POST" action="/users/login"
+      enctype="application/x-www-form-urlencoded">
     <fieldset>
         <label>User Name</label>
-        <input type="text" required name="User name" placeholder="Username" />
+        <input type="text" required placeholder="Username" name="username"/>
         <br/>
         <label>Password</label>
-        <input type="Password" required name="Password" placeholder="Password"/>
+        <input type="Password" required placeholder="Password" name="password"/>
         <br/> </fieldset>
     <input type="submit" value="Login">
     <p>Do not have an account?</p>

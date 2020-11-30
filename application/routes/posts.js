@@ -1,51 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var isLoggedIn = require('../middleware/routeprotectors').userIsLoggedIn;
-var getRecentPosts = require('../middleware/postsmiddleware').getRecentPosts;
-var db = require('../config/database');
+var db = require("../config/database");
+const { successPrint, errorPrint } = require("../helpers/debug/debugprinters");
+var sharp = require('sharp');
+var multer = require('multer');
+var crypto = require('crypto');
+var PostError = require('../helpers/debug/error/PostError');
+const { route } = require('.');
 
-/* GET home page. */
-router.get('/', getRecentPosts, function(req, res, next) {
-  res.render('index',{title:"instructor APP"});
+var storage = multer.diskStorage({
+   /* destination: function (req, file, cb) {
+        console.log("Dest");
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }*/
 });
 
-router.get('/login',(req, res, next) => {
-  res.render("login",{title:"Log IN"})
+var uploader = multer({storage: storage});
+
+router.post('/createPos', uploader.single("uploadImage"),(req, res, next) => {
+    let fileUploaded = req.file.path;
+    let fileAsThumbnail = `thumbnail-${req.file.filename}`;
+    let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
+    let title = req.body.title;
+    let description = req.body.description;
+    let fk_userId = req.session.userId;
 });
-
-router.get('/registration',(req, res, next) => {
-  res.render("registration",{title:"Registration"})
-});
-
-router.get('/postimage',(req, res, next) => {
-  res.render("postimage",{title:"Post Image"})
-});
-
-
-router.get('/post/:id(\\d+)',(req, res, next) => {
-  let baseSQL =
-      "SELECT u.username, p.title, p.description, p.photopath, p.created\
-  FROM users u\
-  JOIN posts p\
-  ON u.id = fk_userid\
-  WHERE p.id=?;";
-
-  let postId = req.params.id;
-  db.execute(baseSQL, [postId])
-      .then(([results, fields]) =>{
-        if(results && results.length){
-          let post = results[0];
-          res.render('imagepost', {currentPost: post});
-
-        }else{
-          req.flash('error','This is not the post you are looking for!');
-          res.redirect('/');
-        }
-      })
-
-
-});
-/* moved to routes/Posts.js
+//localhost:3000/posts/search?search=value
 router.get('/search', (req, res, next) => {
     let searchTerm = req.query.search;
     if(!searchTerm){
@@ -76,12 +59,11 @@ router.get('/search', (req, res, next) => {
                                 message: "No results where found for your search but here are the 8 most recent posts",
                                 results: results
                             });
-                    })
+                        })
 
                 }
             })
             .catch((err) => next(err))
     }
 });
-*/
 module.exports = router;

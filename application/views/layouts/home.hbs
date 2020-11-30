@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../public/css/form.css">
-    <script defer type="text/javascript" src="../public/js/fetch.js"></script>
+    <script defer type="text/javascript" src="../public/js/frontendjs.js"></script>
+    <!-- <script defer type="text/javascript" src="../public/js/fetch.js"></script>
+    <script defer type="text/javascript" src="../public/js/validation.js"></script>-->
     <title>{{title}}</title>
 </head>
 <body>
@@ -11,19 +14,47 @@
     <div class="banner">
         <a href="/" class="logo">Instructor's Photo App</a>
         <div class="banner-middle">
-            <input type="search" placeholder="Search for posts"/>
-            <button type="submit">Search</button>
+            <input id="search-text" name="search-text" type="text" placeholder="Search for posts"/>
+            <button id="search-button" type="submit">Search</button>
         </div>
         <div class="banner-right">
-            <a class="active" href="/login">LOG IN</a>
-            <a href="/postimage">Post</a>
+            <a class="active2" href="/postimage">Post</a>
+            {{#if logged}}
+                <a id="logout-button" class="active">LOG OUT</a>
+                {{else}}
+                <a id="login-button" class="active" href="/login">LOG IN</a>
+            {{/if}}
         </div>
     </div>
 </header>
+<div id="flash-message">
+    {{#if message.error }}
+        <div class="alert alert-danger">{{message.error}}</div>
+    {{else}}
+        <div class="alert alert-success">{{message.success}}</div>
+    {{/if}}
+</div>
 {{{body}}}
+{{#if logged}}
+    <script>
+    let ele = document.getElementById('logout-button');
+    if(ele) {
+        ele.onclick = (even) => {
+            fetch('/users/logout', {
+                method:"POST"
+            })
+            .then((data) => {
+                location.reload();
+                location.replace('/');
+            })
+        }
+    }
+    </script>
+{{/if}}
 <footer>
     <p>Author: Mohammad Abdelrahman @ 2020<br>
-        <a href="mabdelrahman@mail.sfsu.edu">contact Owner</a></p>
+        <a href="https://www.linkedin.com/in/mohammad-abdelrahman/" class="fa fa-linkedin"></a>
+        <a href="https://www.facebook.com/albossmohammad" class="fa fa-facebook"></a>
 </footer>
 
 </body>

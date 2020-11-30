@@ -17,18 +17,29 @@ header{
 }
 
 .banner-middle {
-    float: inside;
+    float: left;
+    padding-left: 15px;
 
 }
 
 .banner a.logo {
     font-size: 25px;
     font-weight: bold;
+    padding-bottom: 60px;
 }
 
 .banner a.active {
     background-color: #4CAF50;
     color: white;
+    cursor: pointer;
+}
+.banner a.active2 {
+    background-color: #9f9f9f;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 0.25rem;
+    margin: 5px 10px;
+
 }
 .banner a {
         float: left;
@@ -39,6 +50,21 @@ header{
         font-size: 18px;
         line-height: 25px;
         border-radius: 4px;
+}
+
+#flash-message {
+    position: fixed;
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%,0);
+    z-index: 9999;
+    font-size: 25px;
+    color: #00B7FF;
+    padding: 20px;
+}
+
+#flash-message div {
+    text-align: center;
 }
 
 footer {
@@ -61,11 +87,44 @@ footer {
 
 }
 
+.fa:hover {
+    opacity: 0.7;
+}
+.fa-linkedin {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    background: #3B5998;
+    color: white;
+    size: A3;
+}
+
+.fa-facebook {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    background: #3B5998;
+    color: white;
+    size: A3;
+}
+
+#search-text{
+    padding: 16px 20px;
+}
 button{
     background-color: #4CAF50;
+    color: white;
     border: 8px;
     border-radius: 0.25rem;
-    padding: 16px 32px;
+    padding: 16px 20px;
     margin: 4px 2px;
     cursor: pointer;
 }
@@ -141,14 +200,13 @@ p {
     text-align: left;
 }
 
-#demo {
-    width: 800px;
+#main-content {
     margin: auto;
     display: grid;
-    gap: 20px 2px;
+    gap: 30px 30px;
     justify-items: center;
     grid-template-columns: repeat(4, 250px);
-    grid-template-rows: repeat(4, 250px);
+    grid-template-rows: repeat(4, 350px);
 
 }
 

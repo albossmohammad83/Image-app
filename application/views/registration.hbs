@@ -4,26 +4,27 @@
             <h1>Registration Form</h1>
         </header>
     </div>
-    <form id="form" class="form">
+    <form id="form" class="form" method="POST" action="/users/register"
+          enctype="application/x-www-form-urlencoded">
         <fieldset>
         <div class="form-control">
             <label for="username">User Name</label>
-            <input type="text" placeholder="username" id="username" />
+            <input type="text" placeholder="username" id="username" name="username" />
             <small>Error message</small>
         </div>
         <div class="form-control">
             <label for="username">Email</label>
-            <input type="email" placeholder="email" id="email" />
+            <input type="email" placeholder="email" id="email" name="email" />
             <small>Error message</small>
         </div>
         <div class="form-control">
             <label for="username">Password</label>
-            <input type="password" placeholder="Password" id="password"/>
+            <input type="password" placeholder="Password" id="password" name="password"/>
             <small>Error message</small>
         </div>
         <div class="form-control">
             <label for="username">Password confirmation</label>
-            <input type="password" placeholder="Password confirmation" id="password2" />
+            <input type="password" placeholder="Password confirmation" id="password2" name="cpassword" />
             <small>Error message</small>
         </div>
             <input type="checkbox" name="accept 13+ years of age" required/>

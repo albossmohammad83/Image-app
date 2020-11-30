@@ -1,2 +1,13 @@
 
-
+<div id="main-content">
+    {{#each results}}
+        <div id="post-{{id}}" class="card">
+            <img class="card-image" src="{{thumbnail}}" alt="Missing Image">
+            <div class="card-body">
+                <p class="card-title">{{title}}</p>
+                <p class="card-text">{{description}}</p>
+                <a href="/post/{{id}}" class="anchor-buttons">Post Details</a>
+            </div>
+        </div>
+    {{/each}}
+</div>
