@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../public/css/form.css">
-    <script defer type="text/javascript" src="../public/js/frontendjs.js"></script>
-    <!-- <script defer type="text/javascript" src="../public/js/fetch.js"></script>
-    <script defer type="text/javascript" src="../public/js/validation.js"></script>-->
+    <script defer type="text/javascript" src="public/js/frontendjs.js"></script>
     <title>{{title}}</title>
 </head>
 <body>
@@ -27,11 +25,16 @@
         </div>
     </div>
 </header>
-<div id="flash-message">
-    {{#if message.error }}
-        <div class="alert alert-danger">{{message.error}}</div>
-    {{else}}
-        <div class="alert alert-success">{{message.success}}</div>
+<div id="main-content">
+    {{log this}}
+    {{#if (emptyObject messages)}}
+        <div id="flash-message">
+            {{#if messages.error }}
+                <div class="alert alert-danger">{{messages.error}}</div>
+            {{else}}
+                <div class="alert alert-success">{{messages.success}}</div>
+            {{/if}}
+        </div>
     {{/if}}
 </div>
 {{{body}}}
@@ -51,6 +54,8 @@
     }
     </script>
 {{/if}}
+<br>
+<br>
 <footer>
     <p>Author: Mohammad Abdelrahman @ 2020<br>
         <a href="https://www.linkedin.com/in/mohammad-abdelrahman/" class="fa fa-linkedin"></a>

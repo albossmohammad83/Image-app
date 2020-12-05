@@ -12,7 +12,7 @@ var postsRouter = require('./routes/posts');
 var dbRouter = require('./routes/dbtest');
 var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
-
+var flash = require('express-flash');
 var app = express();
 
 app.engine(
@@ -22,6 +22,9 @@ app.engine(
         extname: ".hbs",
         defaultLayout: "home",
         helpers: {
+            emptyObject: (obj) => {
+                return !(obj.constructor == Object && Object.keys(obj).length == 0);
+            }
             /*
             * if needed
             * */
@@ -42,13 +45,14 @@ app.use(sessions({
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(flash());
 app.set("view engine", "hbs");
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/public", express.static(path.join(__dirname, 'public')));
-
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next)=>{
         requestPrint(req.url);
@@ -64,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-app.use('/dbtest', dbRouter);
+//app.use('/dbtest', dbRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 

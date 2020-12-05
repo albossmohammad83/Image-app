@@ -68,19 +68,16 @@ header{
 }
 
 footer {
-    padding: 20px 10px;
-    background-color: #f1f1f1;
     position: fixed;
+    padding: 10px 10px;
+    background-color: #f1f1f1;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 98%;
     float: left;
     color: black;
     text-align: center;
-    line-height: 25px;
     text-decoration: none;
-    font-size: 18px;
-    border-radius: 0.25rem;
     border: .1rem solid #4CAF50;
     box-shadow: 2px 2px 2px #4CAF50;
     margin: 0 0 5px 0;
@@ -163,7 +160,7 @@ fieldset{
 body {
     font-family: "American Typewriter";
     background-color: lightgrey;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -201,13 +198,24 @@ p {
 }
 
 #main-content {
-    margin: auto;
+    grid-area: content;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
     display: grid;
-    gap: 30px 30px;
-    justify-items: center;
-    grid-template-columns: repeat(4, 250px);
-    grid-template-rows: repeat(4, 350px);
+    gap: .2rem .2rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+}
 
+.card {
+    display: grid;
+    grid-template-rows: 186px 150px;
+    grid-template-columns: auto;
+    border: .0625rem solid #cccccc;
+    border-radius: .25rem;
+    box-shadow: 0 2px 2px #dfdede;
 }
 
 div.gallery:hover {
@@ -215,13 +223,72 @@ div.gallery:hover {
     text-emphasis-position: right;
 }
 
-div.gallery img {
+div.card-image {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+div[class=card] > img {
+    height: 100%;
     width: 100%;
-    height: 200px;
 }
 
-div.desc {
-    padding: 15px;
+.card-title {
+    color: white;
+    font-family: "American Typewriter";
+    margin-bottom: .1rem;
+    margin-top: 0;
+    padding-top: .1rem;
+}
+
+.card-body {
+    grid-area: 2 / 1 / 3 / 2;
+    padding: .75rem;
+    background-color: #676565;
+    border-radius: 0 0 .2rem .2rem;
+}
+
+div.card-text {
+    color: white;
+    font-family: "American Typewriter";
+}
+
+.anchor-buttons {
+    background-color: #4CAF50;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
     text-align: center;
+    line-height: 2rem;
+    border: .0625rem solid white;
+    border-radius: .25rem;
+    font-weight: bold;
+    font-size: medium;
+    padding-left: .25rem;
+    padding-right: .25rem;
 }
 
+.anchor-buttons:hover {
+    box-shadow: none;
+    padding: 0;
+    color: #232f3e;
+    background-color: white;
+    padding-left: .25rem;
+    padding-right: .25rem;
+}
+
+.active2 {
+    background-color: #9f9f9f;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 0.25rem;
+    margin: 5px 10px;
+}
+
+img {
+    width: auto;
+    height: 500px;
+}
+post-container {
+    padding-bottom: 200px;
+}

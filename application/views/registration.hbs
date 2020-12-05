@@ -4,7 +4,7 @@
             <h1>Registration Form</h1>
         </header>
     </div>
-    <form id="form" class="form" method="POST" action="/users/register"
+    <form id="form" class="form" method="POST" onsubmit="return checkInputs()" action="/users/register"
           enctype="application/x-www-form-urlencoded">
         <fieldset>
         <div class="form-control">

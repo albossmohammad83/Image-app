@@ -1,19 +1,20 @@
 <header>
     <h1>Postimage Form</h1>
 </header>
-<form>
+<form id="post-image" class="form-grid-postimage" method="POST" enctype="multipart/form-data" action='/posts/createPost'>
     <fieldset>
         <label>Post title</label>
-        <input type="text" name="post title" />
+        <input type="text" name="title" id="post-title" placeholder="Post Title" required/>
         <br/>
         <label>Post description</label>
-        <input type="text" name="post description" />
+        <input type="text" name="description" id="post-desc" placeholder="Post Description" required/>
         <br/>
-        <label>Add image</label>
-        <input type="file"/>
+        <label>Upload Image</label>
+        <input id="img-select" type="file" name="uploadImage" required/>
         <br/>
         <input type="checkbox" name="images policy" />
         <label>Accept the policy for uploading images</label>
     </fieldset>
-    <input type="submit" value="Submit Image">
+    <input id="submit" type="submit" value="Submit Image">
+    <input id="cancel" class="active2" type="reset" value="  Clear  ">
 </form>

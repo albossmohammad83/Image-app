@@ -2,6 +2,7 @@ const { successPrint, errorPrint} = require("../helpers/debug/debugprinters");
 const routeProtectors = {};
 
 
+
 //express-rev-request -> mw1 -> mw2 -> mw3 -> ... -> mwN -> router.HTTTPVERB
 routeProtectors.userIsLoggedIn = function (req, res, next) {
     if(req.session.username){

@@ -16,3 +16,10 @@ post
     active
     created
     fk_userid
+
+comments
+    id
+    comment
+    fk_postid
+    fk_userid
+    created
