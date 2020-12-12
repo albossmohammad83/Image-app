@@ -2,7 +2,19 @@ var db = require('../config/database');
 var bcrypt = require('bcrypt');
 var flash = require('express-flash');
 const UserModel = {};
+UserModel.createComment = (comment) => {
+    let baseSQL = "INSERT INTO comments (comments) VALUES (?);"
+        return db.execute(baseSQL, [comment])
 
+        .then(([results, fields]) => {
+            if(results && results.affectedRows){
+                return Promise.resolve(results.insertId);
+            }else{
+                return Promise.resolve(-1);
+            }
+        })
+        .catch((err) => Promise.reject(err));
+}
 UserModel.create = (username, password, email) => {
     return bcrypt.hash(password, 15)
         .then((hashedPassword) => {

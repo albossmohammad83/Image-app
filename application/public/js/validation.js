@@ -2,16 +2,12 @@ var form = document.getElementById('form');
 var username = document.getElementById('username');
 var email = document.getElementById('email');
 var password = document.getElementById('password');
-var password2 = document.getElementById('password2');
+var password2 = document.getElementById('cpassword');
 var valid= true;
-form.addEventListener('submit', e => {
+form.addEventListener('input', e => {
     e.preventDefault();
 
     checkInputs();
-    if(valid) {
-    alert("Information Registered");
-    location.reload();
-    }
 });
 
 function checkInputs() {

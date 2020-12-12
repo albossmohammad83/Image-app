@@ -1,31 +1,90 @@
 <div id="post-container">
+    <header id="image-post-title">
+        <h2>
+            <div id="image-post-title-text"><strong>Title: </strong>{{currentPost.title}}</div>
+            <div id="image-post-author" class="info-tags"><strong>Posted by: </strong>{{currentPost.username}}</div>
+        </h2>
+        <div id="image-post-date" class="info-tags"><strong>Time post created: </strong>{{currentPost.created}}</div>
+    </header>
     <img id="image-post-image" src="/{{currentPost.photopath}}">
     <div id="info-message-grid">
         <div id="info">
-            <header id="image-post-title">
-                <h2 id="image-post-title-text">Title: {{currentPost.title}}</h2>
-            </header>
-            <div id="image-post-author" class="info-tags">User name: {{currentPost.username}}</div>
-            <div id="image-post-date" class="info-tags">Time post created: {{currentPost.created}}</div>
-            <div id="image-post-desc" class="info-tags">Description: {{currentPost.description}}</div>
+            <h2>
+            <div id="image-post-desc" class="info-tags"><strong>Description: </strong>{{currentPost.description}}</div>
+        </h2>
         </div>
-{{#if logged}}
         <div id="messages">
             <div id="comment-title">
                 <header>
                     <h2>Comments</h2>
-                </header>
-                <div id="message-list">
-
+                <div id="comment-list">
+                        {{#each currentPost.comments}}
+                        <div id="message-">
+                            <div id="messgae-{{id}}">
+                                <strong class="author-text">@{{username}}</strong>
+                                <span class="date-posted">{{created}}</span>
+                                <div class="comment-text">{{comment}}</div>
+                            </div>
+                        </div>
+                        {{/each}}
                 </div>
+                </header>
+                {{#if logged}}
                 <div id="comment-box">
-                <textarea id="comment-box-text"></textarea><br>
-                    <button id="comment-box-button" >Comment
-                        <i id="comment-box-button" class="fa fa-comment" aria-hidden="true" style="text-align: center;font-size:20px"></i>
-                    </button>
+                <textarea id="comment" name="comment" placeholder="Comment here"></textarea><br>
+                    <input type="submit" id="comment-button" value="Comment">
                  </div>
              </div>
+                {{/if}}
         </div>
-{{/if}}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('span[class=date-posted]').forEach((postedDate) => {
+            postedDate.textContent = new Date(postedDate.textContent).toLocaleString();
+        });
+    });
+
+    function addMessage(data){
+        let template = document.createElement('template');
+        template.innerHTML =
+            `<div id="messgae-${data.commentId}">
+                 <strong class="author-text">@${data.username}</strong>
+                <span class="date-posted">${new Date().toLocaleString()}</span>
+                <div class="comment-text">${data.comment}</div>
+            </div>`;
+        document.getElementById('message-list').firstChild.before(template.content.firstChild);
+    }
+
+    document.getElementById('comment-button').onclick = (event) => {
+        let commentText = document.getElementById('comment').value;
+        let postId = document.location.pathname.match(/\d+/g).map(Number)[0];
+
+        if(!commentText){
+            return;
+        }
+
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                comment: commentText,
+                postId, postId
+            })
+        }
+            fetch('/comments/create', fetchOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.code == 1){
+                    addMessage(data);
+                }else{
+                    addFlashFromFrontEnd(data.message, data.status);
+                }
+            })
+        .catch(err => console.log(err));
+    }
+</script>

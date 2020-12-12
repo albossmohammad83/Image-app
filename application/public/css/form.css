@@ -12,6 +12,7 @@ header{
     
 }
 
+
 .banner-right {
     float: right;
 }
@@ -25,7 +26,6 @@ header{
 .banner a.logo {
     font-size: 25px;
     font-weight: bold;
-    padding-bottom: 60px;
 }
 
 .banner a.active {
@@ -58,17 +58,37 @@ header{
     top: 8%;
     transform: translate(-50%,0);
     z-index: 9999;
-    font-size: 25px;
-    color: #00B7FF;
-    padding: 20px;
+    font-size: 20px;
+    color: #059;
+    /*background-color: #BEF;*/
+    padding: 10px;
+    border-radius: 3px 3px 3px 3px;
+    margin: 10px 0;
+}
+#message-{
+    padding: -6px;
+    border: 5px solid #545747;
+    margin: 5px;
+}
+.author-text {
+    color: #053698;
+}
+#alert-danger{
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
+#alert-success{
+    color: #270;
+    background-color: #DFF2BF;
 }
 
 #flash-message div {
     text-align: center;
 }
 
-footer {
-    position: fixed;
+footer{
+    position: relative;
     padding: 10px 10px;
     background-color: #f1f1f1;
     left: 0;

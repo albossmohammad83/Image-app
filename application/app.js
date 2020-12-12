@@ -9,6 +9,7 @@ var handlebars = require('express-handlebars');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
+var commentRouter = require('./routes/comments');
 var dbRouter = require('./routes/dbtest');
 var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
@@ -60,7 +61,6 @@ app.use((req, res, next)=>{
 });
 
 app.use((req, res, next) => {
-    console.log(req.session);
     if(req.session.username){
         res.locals.logged = true;
     }
@@ -71,9 +71,9 @@ app.use('/', indexRouter);
 //app.use('/dbtest', dbRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/comments', commentRouter);
 
 app.use((err, req, res, next) => {
-   console.log(err);
    errorPrint(err);
    res.render('error', {err_message: err});
 });

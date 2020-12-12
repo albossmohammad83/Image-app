@@ -10,6 +10,7 @@ function setFlashMessageFadeOut(flashMessageElement){
             flashMessageElement.style.opacity = currentOpacity;
         }, 50);
     }, 4000)
+
 }
 
 function addFlashFromFrontEnd(message){
@@ -42,21 +43,29 @@ function executeSearch(){
     }
     let mainContent = document.getElementById('main-content');
     let searchURL = `posts/search?search=${searchTerm}`;
-    fetch(searchURL)
-        .then((data) => {
-            return data.json();
-        })
-        .then((data_json) => {
-            let newMaincontentHTML = '';
-            data_json.results.forEach((row) => {
-                newMaincontentHTML += createCard(row);
-            });
-            mainContent.innerHTML = newMaincontentHTML
-            if(data_json.message){
-                addFlashFromFrontEnd(data_json.message);
-            }
-        })
-        .catch((err) => console.log(err));
+fetch(searchURL)
+    .then((data) => {
+        return data.json();
+    })
+    .then((data_json) => {
+        let newMaincontentHTML = '';
+        data_json.results.forEach((row) => {
+            newMaincontentHTML += createCard(row);
+        });
+        mainContent.innerHTML = newMaincontentHTML
+        if(data_json.message){
+            addFlashFromFrontEnd(data_json.message);
+        }
+    })
+    .catch((err) => console.log(err));
+}
+
+function createComment(currentPost){
+    return `<div id="comment-list">
+        <div id="image-post-comm" class="info-tags">
+            </strong>${currentPost.username}</strong>: {currentPost.comments}
+            </div>
+        </div>`
 }
 
 let flashElement = document.getElementById('flash-message');
@@ -67,4 +76,9 @@ if(flashElement){
 let searchButton = document.getElementById('search-button');
 if(searchButton){
     searchButton.onclick = executeSearch;
+}
+
+let commentButton = document.getElementById('comment-button');
+if(commentButton){
+    commentButton.onclick = createComment;
 }
